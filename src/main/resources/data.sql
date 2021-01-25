@@ -1,0 +1,4 @@
+INSERT INTO USER(name) VALUES('Ronaldo');
+INSERT INTO USER(name) VALUES('Betano');
+INSERT INTO USER(name) VALUES('Ciclano');
+INSERT INTO USER(name) VALUES('Fulano');

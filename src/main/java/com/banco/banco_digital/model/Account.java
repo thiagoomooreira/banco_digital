@@ -17,12 +17,25 @@ public class Account {
 	@ManyToOne
 	private User user;
 	
+	public Account() {
+		
+	}
+	
 	public Account(String number,String agency, User user) {
 		this.number = number;
 		this.agency = agency;
 		this.user = user;
 	}
 	
+	public boolean transferPurse(Account accountDestiny, double value) {
+		if(this.purse >= value) {
+			this.purse -= value;
+			accountDestiny.setPurse(value);
+			return true;
+		}
+		
+		return false;
+	}
 	
 	public Long getId() {
 		return id;

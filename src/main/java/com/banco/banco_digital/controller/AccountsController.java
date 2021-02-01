@@ -3,7 +3,6 @@ package com.banco.banco_digital.controller;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.banco.banco_digital.controller.form.AccountForm;
+import com.banco.banco_digital.controller.form.TransferForm;
 import com.banco.banco_digital.model.Account;
 import com.banco.banco_digital.repository.AccountRepository;
 import com.banco.banco_digital.repository.UserRepository;
@@ -90,5 +90,11 @@ public class AccountsController {
 		}
 		
 		return ResponseEntity.notFound().build();
+	}
+	
+	@PostMapping("/transfer")
+	public void transferPurse(@RequestBody @Valid TransferForm form) {
+		System.out.println(form.getValue());
+		System.out.println(form.getAccountDestiny().getNumber());
 	}
 }

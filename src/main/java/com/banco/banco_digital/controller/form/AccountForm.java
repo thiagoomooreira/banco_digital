@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import com.banco.banco_digital.model.Account;
 import com.banco.banco_digital.model.User;
 import com.banco.banco_digital.repository.UserRepository;
-import com.sun.istack.NotNull;
+import javax.validation.constraints.NotNull;
 
 public class AccountForm {
 	

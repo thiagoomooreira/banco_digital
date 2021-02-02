@@ -74,14 +74,15 @@ public class AccountsController {
 		return ResponseEntity.notFound().build();
 	}
 	
-	@PutMapping("/{idOrigin}/{idDestiny}/{value}")
+	
+	@PostMapping("/transfer")
 	@Transactional
-	public ResponseEntity<?> transferPurse(@PathVariable Long idOrigin, @PathVariable Long idDestiny, @PathVariable double value) {
-		Optional<Account> accountOriginOptional = accountRepository.findById(idOrigin);
-		Optional<Account> accountDestinyOptional = accountRepository.findById(idDestiny);
+	public ResponseEntity<?> transferPurse(@RequestBody @Valid TransferForm form) {
+		Optional<Account> accountOriginOptional = accountRepository.findByNumber(form.getAccountOrigin().getNumber());
+		Optional<Account> accountDestinyOptional = accountRepository.findByNumber(form.getAccountDestiny().getNumber());
 		
 		if(accountOriginOptional.isPresent() && accountDestinyOptional.isPresent()) {
-			boolean status = accountOriginOptional.get().transferPurse(accountDestinyOptional.get(), value);
+			boolean status = accountOriginOptional.get().transferPurse(accountDestinyOptional.get(), form.getValue());
 			
 			if(status)
 				return ResponseEntity.ok().build();
@@ -90,11 +91,5 @@ public class AccountsController {
 		}
 		
 		return ResponseEntity.notFound().build();
-	}
-	
-	@PostMapping("/transfer")
-	public void transferPurse(@RequestBody @Valid TransferForm form) {
-		System.out.println(form.getValue());
-		System.out.println(form.getAccountDestiny().getNumber());
 	}
 }
